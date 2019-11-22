@@ -19,7 +19,7 @@ class MainController extends Controller
 
     public function actionErr()
     {
-        $this->viewPage("404Page.php",'Main');
+        $this->viewPage("404Page.php",'404err');
     }
     
     public function actionMain()
