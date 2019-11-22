@@ -9,8 +9,4 @@
 
 <body>
   <header>
-    <div class="hdrlogo"></div><?= ($config['menu'] == "main") ? '<div class="hdrmenu">
-    <ul><li><a href="#">PARTIC</a></li>
-    <li><a href="#">DRAW</a></li>
-    <li><a href="#">COMPETITION</a></li></ul></div>' : '<div class="CONF_header"><span>' . $config['header'] . '</span></div>' ?>
   </header>
