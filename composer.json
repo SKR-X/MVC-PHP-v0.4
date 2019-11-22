@@ -1,0 +1,18 @@
+{
+    "name": "skr-x/mvc_php",
+    "description": "MVC PHP",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Components\\": "components/",
+            "Controllers\\": "controllers/",
+            "Models\\": "models/",
+            "Github\\": "github/",
+            "Core\\": "core/"
+        }
+    }
+}
