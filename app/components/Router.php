@@ -24,7 +24,7 @@ class Router
 
     static public function throwErr()
     {
-        $main = new MainController;
+        $main = new MainController();
         $main->actionErr();
     }
 
@@ -32,7 +32,7 @@ class Router
 
     static public function throwMain()
     {
-        $main = new MainController;
+        $main = new MainController();
         $main->actionMain();
     }
 
