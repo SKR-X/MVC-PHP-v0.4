@@ -22,69 +22,55 @@ class AdminController extends Controller
 
     public function actionIndex()
     {
-        $this->viewPage("404Page.php", array(
-            "view" => "404View",
-            "title" => "404 Page",
-            "css" => "Err",
-            "header" => "404 Page",
-            "menu" => "none"
-        ));
+        $this->viewPage('404Page.php', '404');
     }
 
     public function actionLogin()
     {
-        $this->viewPage("AdminLoginPage.php", array(
-            "view" => "AdminLoginView",
-            "title" => "Login",
-            "css" => "Admin",
-            "header" => "Login",
-            "menu" => "none"
-        ));
+        $this->viewPage('AdminLoginPage.php', 'loginADM');
     }
 
     public function actionPanel()
     {
-        if ($this->Session->sessionCheck("ADMIN")) {
-            $this->viewPage("AdminPanelPage.php", array(
-                "view" => "AdminPanelView",
-                "title" => "Panel",
-                "css" => "Admin",
-                "header" => "Panel",
-                "menu" => "none"
-            ));
+        if ($this->Session->sessionCheck('ADMIN')) {
+            $this->viewPage('AdminPanelPage.php', 'panelADM');
         } else {
-            $this->viewPage("404Page.php", array(
-                "view" => "404View",
-                "title" => "404 Page",
-                "css" => "Err",
-                "header" => "404 Page",
-                "menu" => "none"
-            ));
+            $this->viewPage('404Page.php', '404');
         }
     }
 
     public function actionCheckPostLogin()
     {
-        if ($_POST['adminlog'] == "1" && $_POST['adminpass'] == "1") {
-            $this->Session->sessionStart("ADMIN");
-            header("location: /admin/panel");
+        if (isset($_POST['adminlog']) && $_POST['adminlog'] == '1' && $_POST['adminpass'] == '1') {
+            $this->Session->sessionStart('ADMIN');
+            header('location: /admin/panel');
         } else {
-            $this->viewPage("PostInfoLoginPage.php", array(
-                "view" => "PostInfoLoginView",
-                "title" => "Error",
-                "css" => "Admin",
-                "header" => "Input error",
-                "menu" => "none"
-            ));
+            $this->viewPage('PostInfoLoginPage.php', 'loginInfoADM');
         }
     }
 
     public function actionCheckPostPanel()
     {
-        if ($this->AdminModel->createNewPage($_POST['urlName'], $_POST['champName'], $_POST['description'])) {
-            header("Location: /admin/panel");
-        } else {
-            header("Location: /");
+        if (empty($_POST)) {
+            header('Location: /admin/panel');
+        } elseif (!empty($_POST['urlName'])) {
+            if (!$this->AdminModel->takeAllFromTableWhereEqually("champpages", "UrlName", $_POST['urlName'])) {
+                $this->AdminModel->createTablesChamp($_POST['urlName']);
+                $this->AdminModel->insertArray('champpages', array(
+                    'UrlName' => $_POST['urlName']
+                ));
+                header('Location: /admin/panel?response=SUCCESS');
+            } else {
+                header('Location: /admin/panel?response=ERROR');
+            }
+        } elseif (!empty($_POST['urlNameDel'])) {
+            if (
+                $this->AdminModel->deleteTables($_POST['urlNameDel'])
+            ) {
+                header('Location: /admin/panel?response=SUCCESS');
+            } else {
+                header('Location: /admin/panel?response=ERROR');
+            }
         }
     }
 }
