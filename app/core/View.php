@@ -5,24 +5,87 @@ namespace App\Core;
 class View
 {
 
-    private $configArr = array('404err' => array("view" => "404View",
-        "title" => "404 Page",
-        "css" => "Err",
-        "header" => "404 Page",
-        "menu" => "none"), 'Main' => array("view" => "MainView",
-        "title" => "Main Page",
-        "css" => "main",
-        "header" => "Main Page",
-        "menu" => "none"));
-    
-    public function viewPage($pageName, $config, $queryArr)
+    // В РОДИТЕЛЬСКОМ КОНТРОЛЛЕРЕ ТО ЖЕ САМОЕ НАЗВАНИЕ МЕТОДА!!!
+
+    public function viewPage($pageName, $config, $queryArr, $cookieLang, $arg = NULL)
     {
-        if(isset($this->configArr[$config])) {
-            $config = $this->configArr[$config];
+        switch ($config) {
+            case 'loginInfoADM':
+                $config = array(
+                    'view' => 'PostInfoLoginView',
+                    'title' => 'Error',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'panel'
+                );
+                break;
+            case 'panelADM':
+                $config = array(
+                    'view' => 'AdminPanelView',
+                    'title' => 'Panel',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'panel'
+                );
+                break;
+            case 'loginADM':
+                $config = array(
+                    'view' => 'AdminLoginView',
+                    'title' => 'Login',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'login'
+                );
+                break;
+            case 'champ':
+                $config = array(
+                    'view' => 'ChampView',
+                    'title' => 'Alliance Kumite',
+                    'css' => 'Champ'
+                );
+                break;
+            case 'reg':
+                $config = array(
+                    'view' => 'RegView',
+                    'title' => 'Register',
+                    'css' => 'Reg',
+                    'header' => 'reg'
+                );
+                break;
+            case '404':
+                $config = array('view' => '404View',
+                    'title' => '404 Page',
+                    'css' => 'Err',
+                    'menu' => 'none',
+                    'header' => '404err');
+                break;
+            case 'main':
+                $config = array('view' => 'MainView',
+                    'title' => 'Alliance Kumite',
+                    'css' => 'Main',
+                    'menu' => 'none',
+                    'header' => 'main');
+                break;
+
         }
-        if (file_exists(ROOT . '/app/pages/' . $pageName)) {
-            require_once(ROOT . '/app/pages/' . $pageName);
+        if ($cookieLang === false) {
+            $lang = $this->setLanguage("gb");
+            if (file_exists(ROOT . '/app/pages/' . $pageName)) {
+                require_once(ROOT . '/app/pages/' . $pageName);
+            }
+            return $lang;
+        } else {
+            $lang = $this->setLanguage($cookieLang);
+            if (file_exists(ROOT . '/app/pages/' . $pageName)) {
+                require_once(ROOT . '/app/pages/' . $pageName);
+            }
+            return $lang;
         }
     }
-    
-}
+
+    private function setLanguage($langName)
+    {
+        if (file_exists(ROOT . '/app/content/langs/' . $langName . '.ini')) {
+            return parse_ini_file(ROOT . '/app/content/langs/' . $langName . '.ini', TRUE);
+        }
+    }
