@@ -5,7 +5,7 @@ namespace App\Core;
 class Session
 {
 
-    public function sessionStart($name = "")
+    public function sessionStart($name)
     {
         if (isset($name)) {
             $_SESSION[$name] = true;
@@ -15,7 +15,7 @@ class Session
         }
     }
 
-    public function sessionStop($name = "")
+    public function sessionStop($name)
     {
         if (isset($name)) {
             $_SESSION[$name] = false;
@@ -25,7 +25,7 @@ class Session
         }
     }
 
-    public function sessionCheck($name = "")
+    public function sessionCheck($name)
     {
         if(isset($_SESSION[$name])) {
             return true;
