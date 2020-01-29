@@ -89,3 +89,20 @@ class View
             return parse_ini_file(ROOT . '/app/content/langs/' . $langName . '.ini', TRUE);
         }
     }
+
+
+    // старый бред
+
+    // -- Массив $array обязан образовываться от работы метода configTake() (Core/Model.php) --
+
+    // Метод для вывода страницы с указанным конфигом в БД
+
+    // public static function viewPageDB($array){
+    //     $config = $array['config'];
+    //     $query = $array['queryArr'];
+    //     if(file_exists(ROOT.'/app/pages/'.$config['pagename'].'Page.php')){
+    //     require_once (ROOT.'/app/pages/'.$config['pagename'].'Page.php');   
+    //     }
+    // }
+
+}
