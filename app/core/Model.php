@@ -154,3 +154,4 @@ class Model extends SafeMySQL
             return array();
         }
     }
+}
