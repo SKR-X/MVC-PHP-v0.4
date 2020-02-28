@@ -105,3 +105,4 @@ class View
             return parse_ini_file(ROOT . '/app/content/langs/' . $langName . '.ini', TRUE);
         }
     }
+}
