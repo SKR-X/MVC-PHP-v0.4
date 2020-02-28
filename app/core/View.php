@@ -10,6 +10,48 @@ class View
     public function viewPage($pageName, $config, $queryArr, $cookieLang, $arg = NULL)
     {
         switch ($config) {
+            case 'loginInfoADM':
+                $config = array(
+                    'view' => 'PostInfoLoginView',
+                    'title' => 'Error',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'panel'
+                );
+                break;
+            case 'panelADM':
+                $config = array(
+                    'view' => 'AdminPanelView',
+                    'title' => 'Panel',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'panel'
+                );
+                break;
+            case 'loginADM':
+                $config = array(
+                    'view' => 'AdminLoginView',
+                    'title' => 'Login',
+                    'css' => 'Admin',
+                    'menu' => 'none',
+                    'header' => 'login'
+                );
+                break;
+            case 'champ':
+                $config = array(
+                    'view' => 'ChampView',
+                    'title' => '',
+                    'css' => 'Champ'
+                );
+                break;
+            case 'reg':
+                $config = array(
+                    'view' => 'RegView',
+                    'title' => 'Register',
+                    'css' => 'Reg',
+                    'header' => 'reg'
+                );
+                break;
             case '404':
                 $config = array('view' => '404View',
                     'title' => '404 Page',
