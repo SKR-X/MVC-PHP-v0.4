@@ -2,7 +2,7 @@
 Небольшой MVC-фреймворк
 
 
-Правила для .htaccess
+# Правила для .htaccess
 
 <FilesMatch "^\.ht">
 Require all denied
