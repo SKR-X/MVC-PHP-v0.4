@@ -12,40 +12,38 @@ class AdminController extends Controller
 {
 
     private $AdminModel;
-    private $Session;
 
     public function __construct()
     {
         $this->AdminModel = new AdminModel();
-        $this->Session = new Session();
     }
 
     public function actionIndex()
     {
-        $this->viewPage('404Page.php', '404');
+        $this->viewPage('404Page', '404');
     }
 
     public function actionLogin()
     {
-        $this->viewPage('AdminLoginPage.php', 'loginADM');
+        $this->viewPage('AdminLoginPage', 'loginADM');
     }
 
     public function actionPanel()
     {
-        if ($this->Session->sessionCheck('ADMIN')) {
-            $this->viewPage('AdminPanelPage.php', 'panelADM');
+        if (Session::sessionCheck('ADMIN')) {
+            $this->viewPage('AdminPanelPage', 'panelADM');
         } else {
-            $this->viewPage('404Page.php', '404');
+            $this->viewPage('404Page', '404');
         }
     }
 
     public function actionCheckPostLogin()
     {
         if (isset($_POST['adminlog']) && $_POST['adminlog'] == '1' && $_POST['adminpass'] == '1') {
-            $this->Session->sessionStart('ADMIN');
+            Session::sessionStart('ADMIN');
             header('location: /admin/panel');
         } else {
-            $this->viewPage('PostInfoLoginPage.php', 'loginInfoADM');
+            $this->viewPage('PostInfoLoginPage', 'loginInfoADM');
         }
     }
 
@@ -74,3 +72,4 @@ class AdminController extends Controller
         }
     }
 }
+
