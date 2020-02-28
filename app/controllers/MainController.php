@@ -12,6 +12,8 @@ class MainController extends Controller
 {
     private $Model;
 
+    // private $pageInDB;
+
     public function __construct()
     {
         $this->Model = new Model();
@@ -19,11 +21,11 @@ class MainController extends Controller
 
     public function actionErr()
     {
-        $this->viewPage("404Page.php",'404err');
+        $this->viewPage('404Page', '404');
     }
-    
+
     public function actionMain()
     {
-        $this->viewPage("MainPage.php",'Main');
+        $this->viewPage('MainPage', 'main');
     }
 }
