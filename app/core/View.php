@@ -40,7 +40,7 @@ class View
             case 'champ':
                 $config = array(
                     'view' => 'ChampView',
-                    'title' => 'Alliance Kumite',
+                    'title' => '',
                     'css' => 'Champ'
                 );
                 break;
@@ -61,7 +61,7 @@ class View
                 break;
             case 'main':
                 $config = array('view' => 'MainView',
-                    'title' => 'Alliance Kumite',
+                    'title' => '',
                     'css' => 'Main',
                     'header' => 'main');
                 break;
@@ -73,7 +73,7 @@ class View
                 break;
             case 'success':
                 $config = array('view' => 'SuccessView',
-                    'title' => 'Alliance Kumite',
+                    'title' => '',
                     'css' => 'Success',
                     'header' => 'suc');
                 break;
